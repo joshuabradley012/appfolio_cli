@@ -55,7 +55,7 @@ Open a command line and navigate to the search tool in order to run commands:
 
 Subdomains can be searched in bulk, so if you wanted to search through https://larealestate.com, https://realtygroup.com, and https://betterrealtor.com, this would be your command:
 
-    node search.js [search]  larealestate realtygroup betterrealtor
+    node search.js [search] larealestate realtygroup betterrealtor
 
 ### Examples
 
