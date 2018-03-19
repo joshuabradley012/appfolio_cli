@@ -32,7 +32,7 @@ async function searchDomains() {
 		console.log('No listings found.')
 	}
 }
- 
+
 async function getListings(){
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
