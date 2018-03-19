@@ -37,7 +37,6 @@ async function getListings(){
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 	console.log('Gathering listings...');
-
 	try {
 		const domainKeys = Object.keys(domains);
 		let listings = new Object();
