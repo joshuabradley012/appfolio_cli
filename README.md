@@ -24,6 +24,7 @@ Open a command line and navigate to the search tool in order to run commands:
 
     cd ~/Downloads/appfolio_search
 
+### Syntax
 Basic syntax:
 
     node search.js [search] [domain1, ...]
