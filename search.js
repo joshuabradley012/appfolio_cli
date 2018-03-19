@@ -3,22 +3,24 @@ const Json2csvParser = require('json2csv').Parser;
 const fs = require('fs');
 
 const search = process.argv[2];
-let domains, listingUrls, allInfo = new Object();
+let domains = new Object();
+let listingUrls = new Object();
+let allInfo = new Object();
 
-checkDomains();
+searchDomains();
 
-async function checkDomains() {
+async function searchDomains() {
 	for (let i = 3; i <= (process.argv.length - 1); i++) {
 		const domain = process.argv[i];
 		const key = 'domain' + (i - 3);
 		domains[key] = domain;
 	}
 	listingUrls = await getListings();
-	console.log('Seaching listings for section 8...');
-	await checkSection8();
+	console.log('Seaching listings for "' + search + '".');
+	await searchListings();
 	const fields = ['URL', 'Address', 'Rent', 'Size', 'Contact'];
 	const json2csvParser = new Json2csvParser({ fields });
-	if (allInfo.length) {
+	if (objToArray(allInfo).length) {
 		const csv = json2csvParser.parse(objToArray(allInfo));
 		fs.writeFile('./listings_' + Date.now() + '.csv', csv, function(err) {
 	    if(err) {
@@ -27,7 +29,7 @@ async function checkDomains() {
 	    console.log('File saved!');
 		});
 	} else {
-		console.log('No section 8 listings found.')
+		console.log('No listings found.')
 	}
 }
 
@@ -65,7 +67,7 @@ async function getListings(){
 	}
 }
 
-async function checkSection8() {
+async function searchListings() {
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 	try {
@@ -78,8 +80,7 @@ async function checkSection8() {
 			await page.goto(allListings[listing]);
 			let results = await page.evaluate((search) => {
 				const html = document.all[0].outerHTML;
-				const regex = new RegExp(search, 'i');
-				const matches = html.match(regex);
+				const matches = html.match(new RegExp(search, 'gi'));
 				if (matches) {
 					return true;
 				} else {
