@@ -2,8 +2,6 @@
 
 ## Installation
 
-### GitHub
-
 With the big green button in the top right, you can download a ZIP file and open it on your desktop. Otherwise, you can install GitHub and clone the repo:
 
     sudo apt-get install git
