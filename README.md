@@ -8,7 +8,7 @@ With the big green button in the top right, you can download a ZIP file and open
     cd ~/Applications
     git clone git@github.com:joshuabradley012/appfolio_search.git
 
-**Note:** I used `~/Applications` as an example, you can save the file anywhere you'd like.
+**Note:** I used `~/Applications` as an example, you can save the folder anywhere you'd like.
 
 ### Node
 
