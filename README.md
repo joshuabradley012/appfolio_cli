@@ -2,16 +2,33 @@
 
 ## Installation
 
-Before you can use the tool, you'll need to [install node](https://nodejs.org/).
+### Github
+
+With the big green button in the top right, you can download a ZIP file and open it on your desktop.
+
+Otherwise, you can install GitHub and clone the repo:
+
+    sudo apt-get install git
+    cd ~/Applications
+    git clone git@github.com:joshuabradley012/appfolio_search.git
+
+**Note:** I used `~/Applications` as an example, you can save the file anywhere you'd like.
+
+### Node
+
+Before you can use the tool, you'll need to [install node](https://nodejs.org/):
+
+    curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+    sudo apt-get install -y nodejs
 
 Ensure it is installed with these commands:
 
     node -v
     npm -v
     
-Then you'll want to install the dependencies needed for the tool. Open a command line and navigate to the search tool, then run `npm install` to download the dependencies:
+Then you'll want to install the dependencies needed for the tool:
 
-    cd ~/Downloads/appfolio_search
+    cd ~/Applications/appfolio_search
     npm install
 
 When complete, the tool should be ready to use. Note that the node_modules folder that was created should not be removed.
@@ -20,11 +37,11 @@ When complete, the tool should be ready to use. Note that the node_modules folde
 
 You can search through multiple domains in bulk and can customize your search string. Keep in mind this is a very rigid search; it searches for your input exactly (case insensitive). A difference like 'section' vs 'sections' will return different results. So you may need to run several variations to be thorough, and recommend keeping your searches as simple as possible.
 
-When the search is complete, a csv file will be downloaded to the tool's with the information for all of the matched listings.
+When the search is complete, a .csv file will be downloaded to the tool's with the information for all of the matched listings.
 
 Open a command line and navigate to the search tool in order to run commands:
 
-    cd ~/Downloads/appfolio_search
+    cd ~/Applications/appfolio_search
 
 ### Syntax
 
