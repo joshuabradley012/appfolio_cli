@@ -9,7 +9,7 @@ Ensure it is installed with these commands:
     node -v
     npm -v
     
-Then you'll want to install the dependencies needed for the tool. Open a command line and navigate to the search tool, then run `npm install` to download the dependencies.
+Then you'll want to install the dependencies needed for the tool. Open a command line and navigate to the search tool, then run `npm install` to download the dependencies:
 
     cd ~/Downloads/appfolio_search
     npm install
