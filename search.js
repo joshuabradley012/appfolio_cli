@@ -24,7 +24,7 @@ async function searchDomains() {
 		const csv = json2csvParser.parse(objToArray(allInfo));
 		fs.writeFile('./listings_' + Date.now() + '.csv', csv, function(err) {
 			if(err) {
-					return console.log(err);
+				return console.log(err);
 			}
 			console.log('File saved!');
 		});
