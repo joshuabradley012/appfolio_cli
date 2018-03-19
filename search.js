@@ -134,6 +134,7 @@ function cleanListing(listing) {
 		listing[listingKey] = listing[listingKey].replace(/\n/gi, ' ');
 		listing[listingKey] = listing[listingKey].replace(/\s+/gi, ' ');
 		listing[listingKey] = listing[listingKey].replace(/view\sall\slistings/gi, '');
+		listing[listingKey] = listing[listingKey].replace(/MAP/g, '');
 		listing[listingKey] = listing[listingKey].trim();
 	}
 	return listing;
