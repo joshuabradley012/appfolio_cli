@@ -22,7 +22,7 @@ async function searchDomains() {
 	const json2csvParser = new Json2csvParser({ fields });
 	if (objToArray(allInfo).length) {
 		const csv = json2csvParser.parse(objToArray(allInfo));
-		fs.writeFile('./listings_' + Date.now() + '.csv', csv, function(err) {
+		fs.writeFile('./' + search.replace('\s', '_').toLowerCase(); + '_listings_' + Date.now() + '.csv', csv, function(err) {
 	    if(err) {
 	        return console.log(err);
 	    }
