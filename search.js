@@ -31,7 +31,6 @@ searchSubDomains(subDomains);
 * @global subDomains
 * @global listingUrls
 * @global allListings
-*
 */
 async function searchSubDomains() {
 
@@ -68,7 +67,6 @@ async function searchSubDomains() {
 * Search through each subdomain
 *
 * @global subDomains
-*
 */
 async function getListings(){
 
@@ -190,6 +188,11 @@ async function searchListings() {
 	}
 }
 
+/**
+* Convert nested object into single dimensional key value pairs
+*
+* @param obj
+*/
 function flattenObject(obj) {
 
 	var toReturn = {};
@@ -216,6 +219,31 @@ function flattenObject(obj) {
 
 };
 
+
+/**
+* Convert a single dinmensinoal object into an array
+*
+* @param obj
+*/
+function objToArray(obj) {
+
+	var objArr = [];
+	const keys = Object.keys(obj);
+
+	for (const key of keys) {
+		objArr.push(obj[key]);
+	}
+
+	return objArr;
+
+}
+
+
+/**
+* Pass listing information through regex filters
+*
+* @param listing
+*/
 function cleanListing(listing) {
 
 	const listingKeys = Object.keys(listing);
@@ -229,18 +257,5 @@ function cleanListing(listing) {
 	}
 
 	return listing;
-
-}
-
-function objToArray(obj) {
-
-	var objArr = [];
-	const keys = Object.keys(obj);
-
-	for (const key of keys) {
-		objArr.push(obj[key]);
-	}
-
-	return objArr;
 
 }
