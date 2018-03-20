@@ -1,5 +1,4 @@
-/***********************************************************
-*
+/***********************************************************ß
 * Project: AppFolio Listing Search Tool
 * File: search.js
 * Date: 03.19.2018
@@ -8,7 +7,6 @@
 * @requires puppeteer
 * @requires json2csv
 * @requires js
-*
 ************************************************************/
 
 const puppeteer = require('puppeteer');
