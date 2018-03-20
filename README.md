@@ -1,6 +1,6 @@
-#AppFolio Listing Search Tool
+# AppFolio Listing Search Tool
 
-##Installation
+## Installation
 
 Download the ZIP file and unzip it on your desktop or install GitHub and clone the repo:
 
@@ -10,7 +10,7 @@ Download the ZIP file and unzip it on your desktop or install GitHub and clone t
 
 **Note:** `~/Desktop` is an example, you can save the folder anywhere.
 
-###Node
+### Node
 
 Node is required, [install node](https://nodejs.org/):
 
@@ -29,7 +29,7 @@ Install the dependencies:
 
 **Note:** the `node_modules` folder should not be removed.
 
-##Usage
+## Usage
 
 You can search through multiple domains in bulk and can customize your search string or search with [regex](http://www.regular-expressions.info/). Keep in mind this is a very rigid search; it searches for your input exactly (case insensitive), eg 'section' vs 'sections' will return different results but 'section' vs 'Section' will return the same.
 
@@ -39,7 +39,7 @@ Open a command line and navigate to the search tool in order to run commands:
 
     cd ~/Desktop/appfolio_search
 
-###Syntax
+### Syntax
 
     node search.js [search] [subdomain1, ...]
     
@@ -57,7 +57,7 @@ Subdomains can be searched in bulk, eg https://larealestate.appfolio.com, https:
 
     node search.js [search] larealestate realtygroup betterrealtor
 
-###Examples
+### Examples
 
     node search.js 'section 8' solarentals rayrobertsrentals
     node search.js 'rent' rohcs
