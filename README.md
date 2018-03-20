@@ -31,7 +31,7 @@ Install the dependencies:
 
 ## Usage
 
-You can search through multiple domains in bulk and can customize your search string or search with [regex](http://www.regular-expressions.info/). Keep in mind this is a very rigid search; it searches for your input exactly (case insensitive), eg 'section' vs 'sections' will return different results but 'section' vs 'Section' will return the same. So you may need to run several variations to be thorough, and recommend keeping your searches as simple as possible. When the search is complete, a .csv file will be downloaded to the tool's with the information for all of the matched listings.
+You can search through multiple domains in bulk and can customize your search string or search with [regex](http://www.regular-expressions.info/). Keep in mind this is a very rigid search; it searches for your input exactly (case insensitive), eg 'section' vs 'sections' will return different results but 'section' vs 'Section' will return the same. So you may need to run several variations to be thorough, and keeping your searches as simple as possible is recommended. When the search is complete, a .csv file will be downloaded to the tool's with the information for all of the matched listings.
 
 Open a command line and navigate to the search tool in order to run commands:
 
