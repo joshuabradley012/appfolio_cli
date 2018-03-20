@@ -3,7 +3,7 @@
 * File: search.js
 * Date: 03.19.2018
 * Author: Josh Bradley
-*
+* 
 * @requires puppeteer
 * @requires json2csv
 * @requires js
