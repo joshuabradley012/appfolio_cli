@@ -116,7 +116,7 @@ async function getListings(){
 
 /**
 * Search each listing for the keyphrase, if there is a match, 
-* extract key data.
+* extract key data
 *
 * @global search
 * @global listungUrls
