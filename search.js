@@ -53,7 +53,7 @@ async function searchSubDomains() {
 
     fs.writeFile('./' + filename, csv, function(e) {
       if (e) return console.log(e);
-      console.log('Search complete: ' + filename);
+      console.log('Search complete: ' + filename + 'downloaded.');
     });
 
   } else {
