@@ -2,13 +2,13 @@
 
 ## Installation
 
-Download the ZIP file and open it on your desktop or install GitHub and clone the repo:
+Download the ZIP file and unzip it on your desktop or install GitHub and clone the repo:
 
     sudo apt-get install git
-    cd ~/Applications
+    cd ~/Desktop
     git clone git@github.com:joshuabradley012/appfolio_search.git
 
-**Note:** `~/Applications` is an example, you can save the folder anywhere.
+**Note:** `~/Desktop` is an example, you can save the folder anywhere.
 
 ### Node
 
@@ -24,7 +24,7 @@ Ensure node is installed by checking the version:
     
 Install the dependencies:
 
-    cd ~/Applications/appfolio_search
+    cd ~/Desktop/appfolio_search
     npm install
 
 **Note:** the `node_modules` folder should not be removed.
@@ -33,11 +33,11 @@ Install the dependencies:
 
 You can search through multiple domains in bulk and can customize your search string or search with [regex](http://www.regular-expressions.info/). Keep in mind this is a very rigid search; it searches for your input exactly (case insensitive), eg 'section' vs 'sections' will return different results but 'section' vs 'Section' will return the same.
 
-So you may need to run several variations to be thorough, and keeping your searches as simple as possible is recommended. When the search is complete, a .csv file will be downloaded to the tool's with the information for all of the matched listings.
+So you may need to run several variations to be thorough, and keeping your searches as simple as possible is recommended. When the search is complete, a .csv with all matched listings will be downloaded to `./appfolio_search`.
 
 Open a command line and navigate to the search tool in order to run commands:
 
-    cd ~/Applications/appfolio_search
+    cd ~/Desktop/appfolio_search
 
 ### Syntax
 
