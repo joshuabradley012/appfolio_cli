@@ -240,7 +240,7 @@ function objToArray(obj) {
 
 
 /**
-* Remove HTML whitespave and unnecessary phrases
+* Remove HTML whitespace and unnecessary phrases
 *
 * @param listing
 */
