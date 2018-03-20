@@ -40,7 +40,7 @@ async function getListings() {
   listingUrls = await searchSubDomains();
   console.log('Seaching... "' + search + '"');
   
-  await searchListings();
+  allListings = await searchListings();
 
   const fields = ['URL', 'Address', 'Rent', 'Size', 'Contact'];
   const json2csvParser = new Json2csvParser({ fields });
@@ -116,8 +116,7 @@ async function searchSubdomains(){
 * Search each listing for the keyphrase, if there is a match, extract key data
 *
 * @global search
-* @global listungUrls
-* @global allListings
+* @global listingUrls
 */
 async function searchListings() {
 
@@ -170,7 +169,7 @@ async function searchListings() {
         listingObject[listing] = {};
         listingObject[listing] = cleanListing(listingInfo);
 
-        allListings = listingObject;
+        return listingObject;
 
       } // end if
 
