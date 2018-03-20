@@ -34,33 +34,33 @@ searchSubDomains(subDomains);
 */
 async function searchSubDomains() {
 
-	for (let i = 3; i <= (args.length - 1); i++) {
-		const subDomain = args[i];
-		const key = 'subDomain' + (i - 3);
-		subDomains[key] = subDomain;
-	}
+  for (let i = 3; i <= (args.length - 1); i++) {
+    const subDomain = args[i];
+    const key = 'subDomain' + (i - 3);
+    subDomains[key] = subDomain;
+  }
 
-	listingUrls = await getListings();
-	console.log('Seaching... "' + search + '"');
-	
-	await searchListings();
+  listingUrls = await getListings();
+  console.log('Seaching... "' + search + '"');
+  
+  await searchListings();
 
-	const fields = ['URL', 'Address', 'Rent', 'Size', 'Contact'];
-	const json2csvParser = new Json2csvParser({ fields });
+  const fields = ['URL', 'Address', 'Rent', 'Size', 'Contact'];
+  const json2csvParser = new Json2csvParser({ fields });
 
-	if (objToArray(allListings).length) {
+  if (objToArray(allListings).length) {
 
-		const csv = json2csvParser.parse(objToArray(allListings));
-		const filename = 'listings_' + Date.now() + '.csv';
+    const csv = json2csvParser.parse(objToArray(allListings));
+    const filename = 'listings_' + Date.now() + '.csv';
 
-		fs.writeFile('./' + filename, csv, function(e) {
-			if (e) return console.log(e);
-			console.log('Search complete: ' + filename);
-		});
+    fs.writeFile('./' + filename, csv, function(e) {
+      if (e) return console.log(e);
+      console.log('Search complete: ' + filename);
+    });
 
-	} else {
-		console.log('No listings found.')
-	} // end if
+  } else {
+    console.log('No listings found.')
+  } // end if
 }
 
 
@@ -71,47 +71,47 @@ async function searchSubDomains() {
 */
 async function getListings(){
 
-	const browser = await puppeteer.launch();
-	const page = await browser.newPage();
-	console.log('Gathering listings...');
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  console.log('Gathering listings...');
 
-	try {
+  try {
 
-		const subDomainKeys = Object.keys(subDomains);
-		let listings = new Object();
+    const subDomainKeys = Object.keys(subDomains);
+    let listings = new Object();
 
-		for (const subDomain of subDomainKeys) {
+    for (const subDomain of subDomainKeys) {
 
-			const listingPage = 'https://' + subDomains[subDomain] + '.appfolio.com/listings/';
-			await page.goto(listingPage);
+      const listingPage = 'https://' + subDomains[subDomain] + '.appfolio.com/listings/';
+      await page.goto(listingPage);
 
-			listings[subDomains[subDomain]] = await page.evaluate((subDomains, subDomain) => {
+      listings[subDomains[subDomain]] = await page.evaluate((subDomains, subDomain) => {
 
-				const html = document.all[0].outerHTML;
-				const urls = html.match(/<a.*?>.*?View Details.*?<\/a>/gi);
-				const urlObject = new Object();
+        const html = document.all[0].outerHTML;
+        const urls = html.match(/<a.*?>.*?View Details.*?<\/a>/gi);
+        const urlObject = new Object();
 
-				if (urls) {
-					for (let i = 0; i < urls.length; i++) {
-						const key = 'listing'  + i;
-						let url = urls[i].match(/href="(.*?)"/i)[1];
-						urlObject[key] = 'https://' +  subDomains[subDomain] + '.appfolio.com' + url;
-					}
-				}
+        if (urls) {
+          for (let i = 0; i < urls.length; i++) {
+            const key = 'listing'  + i;
+            let url = urls[i].match(/href="(.*?)"/i)[1];
+            urlObject[key] = 'https://' +  subDomains[subDomain] + '.appfolio.com' + url;
+          }
+        }
 
-				return urlObject;
+        return urlObject;
 
-			}, subDomains, subDomain); // end evaluate
+      }, subDomains, subDomain); // end evaluate
 
-		} // end for
+    } // end for
 
-		return listings;
+    return listings;
 
-	} catch(e) {
-		console.log(e);
-	} finally {
-		await browser.close();
-	}
+  } catch(e) {
+    console.log(e);
+  } finally {
+    await browser.close();
+  }
 }
 
 
@@ -126,68 +126,68 @@ async function getListings(){
 */
 async function searchListings() {
 
-	const browser = await puppeteer.launch();
-	const page = await browser.newPage();
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
 
-	try {
+  try {
 
-		const allListingUrls = flattenObject(listingUrls);
-		const listingKeys = Object.keys(allListingUrls);
+    const allListingUrls = flattenObject(listingUrls);
+    const listingKeys = Object.keys(allListingUrls);
 
-		const total = listingKeys.length;
+    const total = listingKeys.length;
 
-		let listingObject = new Object();
-		let loopCount = 1;
+    let listingObject = new Object();
+    let loopCount = 1;
 
-		for (const listing of listingKeys) {
+    for (const listing of listingKeys) {
 
-			await page.goto(allListingUrls[listing]);
+      await page.goto(allListingUrls[listing]);
 
-			let results = await page.evaluate((search) => {
+      let results = await page.evaluate((search) => {
 
-				const html = document.all[0].outerHTML;
-				const matches = html.match(new RegExp(search, 'gi'));
+        const html = document.all[0].outerHTML;
+        const matches = html.match(new RegExp(search, 'gi'));
 
-				if (matches) {
-					return true;
-				} else {
-					return false;
-				}
+        if (matches) {
+          return true;
+        } else {
+          return false;
+        }
 
-			}, search); // end evaluate
+      }, search); // end evaluate
 
-			if (results) {
+      if (results) {
 
-				let listingInfo = await page.evaluate((allListingUrls, listing) => {
+        let listingInfo = await page.evaluate((allListingUrls, listing) => {
 
-					const listingProperty = new Object();
+          const listingProperty = new Object();
 
-					listingProperty['URL'] = allListingUrls[listing];
-					listingProperty['Address'] = document.querySelector('h1').textContent;
-					listingProperty['Rent'] = document.querySelector('.sidebar__price').textContent;
-					listingProperty['Size'] = document.querySelector('.sidebar__beds-baths').textContent;
-					listingProperty['Contact'] = document.querySelector('.u-pad-bl').textContent;
+          listingProperty['URL'] = allListingUrls[listing];
+          listingProperty['Address'] = document.querySelector('h1').textContent;
+          listingProperty['Rent'] = document.querySelector('.sidebar__price').textContent;
+          listingProperty['Size'] = document.querySelector('.sidebar__beds-baths').textContent;
+          listingProperty['Contact'] = document.querySelector('.u-pad-bl').textContent;
 
-					return listingProperty;
+          return listingProperty;
 
-				}, allListingUrls, listing); // end evaluate
+        }, allListingUrls, listing); // end evaluate
 
-				listingObject[listing] = {};
-				listingObject[listing] = cleanListing(listingInfo);
+        listingObject[listing] = {};
+        listingObject[listing] = cleanListing(listingInfo);
 
-				allListings = listingObject;
+        allListings = listingObject;
 
-			} // end if
+      } // end if
 
-			console.log(Math.floor((loopCount / total) * 100) + '% complete (Checked listing ' + loopCount + '/' + total + ')');
-			loopCount++;
+      console.log(Math.floor((loopCount / total) * 100) + '% complete (Checked listing ' + loopCount + '/' + total + ')');
+      loopCount++;
 
-		} // end for
-	} catch(e) {
-		console.log(e);
-	} finally {
-		await browser.close();
-	}
+    } // end for
+  } catch(e) {
+    console.log(e);
+  } finally {
+    await browser.close();
+  }
 }
 
 /**
@@ -197,27 +197,27 @@ async function searchListings() {
 */
 function flattenObject(obj) {
 
-	var toReturn = {};
+  var toReturn = {};
 
-	for (var i in obj) {
+  for (var i in obj) {
 
-		if (!obj.hasOwnProperty(i)) continue;
+    if (!obj.hasOwnProperty(i)) continue;
 
-		if ((typeof obj[i]) == 'object') {
+    if ((typeof obj[i]) == 'object') {
 
-			var flatObject = flattenObject(obj[i]);
+      var flatObject = flattenObject(obj[i]);
 
-			for (var x in flatObject) {
-				if (!flatObject.hasOwnProperty(x)) continue;
-				toReturn[i + '.' + x] = flatObject[x];
-			}
+      for (var x in flatObject) {
+        if (!flatObject.hasOwnProperty(x)) continue;
+        toReturn[i + '.' + x] = flatObject[x];
+      }
 
-		} else {
-			toReturn[i] = obj[i];
-		} // end if
-	} // end for
+    } else {
+      toReturn[i] = obj[i];
+    } // end if
+  } // end for
 
-	return toReturn;
+  return toReturn;
 
 };
 
@@ -229,14 +229,14 @@ function flattenObject(obj) {
 */
 function objToArray(obj) {
 
-	var objArr = [];
-	const keys = Object.keys(obj);
+  var objArr = [];
+  const keys = Object.keys(obj);
 
-	for (const key of keys) {
-		objArr.push(obj[key]);
-	}
+  for (const key of keys) {
+    objArr.push(obj[key]);
+  }
 
-	return objArr;
+  return objArr;
 
 }
 
@@ -248,16 +248,16 @@ function objToArray(obj) {
 */
 function cleanListing(listing) {
 
-	const listingKeys = Object.keys(listing);
+  const listingKeys = Object.keys(listing);
 
-	for (const listingKey of listingKeys) {
-		listing[listingKey] = listing[listingKey].replace(/\n/gi, ' ');
-		listing[listingKey] = listing[listingKey].replace(/\s+/gi, ' ');
-		listing[listingKey] = listing[listingKey].replace(/view\sall\slistings/gi, '');
-		listing[listingKey] = listing[listingKey].replace(/MAP/g, '');
-		listing[listingKey] = listing[listingKey].trim();
-	}
+  for (const listingKey of listingKeys) {
+    listing[listingKey] = listing[listingKey].replace(/\n/gi, ' ');
+    listing[listingKey] = listing[listingKey].replace(/\s+/gi, ' ');
+    listing[listingKey] = listing[listingKey].replace(/view\sall\slistings/gi, '');
+    listing[listingKey] = listing[listingKey].replace(/MAP/g, '');
+    listing[listingKey] = listing[listingKey].trim();
+  }
 
-	return listing;
+  return listing;
 
 }
