@@ -38,7 +38,7 @@ async function searchSubDomains() {
 		const subDomain = args[i];
 		const key = 'subDomain' + (i - 3);
 		subDomains[key] = subDomain;
-	} // end for
+	}
 
 	listingUrls = await getListings();
 	console.log('Seaching... "' + search + '"');
