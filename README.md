@@ -2,7 +2,7 @@
 
 ## Installation
 
-Download a ZIP file and open it on your desktop or install GitHub and clone the repo:
+Download the ZIP file and open it on your desktop or install GitHub and clone the repo:
 
     sudo apt-get install git
     cd ~/Applications
