@@ -51,10 +51,11 @@ async function searchSubDomains() {
 	if (objToArray(allListings).length) {
 
 		const csv = json2csvParser.parse(objToArray(allListings));
+		const filename = 'listings_' + Date.now() + '.csv';
 
-		fs.writeFile('./listings_' + Date.now() + '.csv', csv, function(e) {
+		fs.writeFile('./' + filename, csv, function(e) {
 			if (e) return console.log(e);
-			console.log('File saved!');
+			console.log('Search complete: ' + filename);
 		});
 
 	} else {
@@ -121,6 +122,7 @@ async function getListings(){
 * @global search
 * @global listungUrls
 * @global allListings
+* @param allListingUrls
 */
 async function searchListings() {
 
@@ -129,8 +131,8 @@ async function searchListings() {
 
 	try {
 
-		const allListings = flattenObject(listingUrls);
-		const listingKeys = Object.keys(allListings);
+		const allListingUrls = flattenObject(listingUrls);
+		const listingKeys = Object.keys(allListingUrls);
 
 		const total = listingKeys.length;
 
@@ -139,7 +141,7 @@ async function searchListings() {
 
 		for (const listing of listingKeys) {
 
-			await page.goto(allListings[listing]);
+			await page.goto(allListingUrls[listing]);
 
 			let results = await page.evaluate((search) => {
 
@@ -156,11 +158,11 @@ async function searchListings() {
 
 			if (results) {
 
-				let listingInfo = await page.evaluate((allListings, listing) => {
+				let listingInfo = await page.evaluate((allListingUrls, listing) => {
 
 					const listingProperty = new Object();
 
-					listingProperty['URL'] = allListings[listing];
+					listingProperty['URL'] = allListingUrls[listing];
 					listingProperty['Address'] = document.querySelector('h1').textContent;
 					listingProperty['Rent'] = document.querySelector('.sidebar__price').textContent;
 					listingProperty['Size'] = document.querySelector('.sidebar__beds-baths').textContent;
@@ -168,7 +170,7 @@ async function searchListings() {
 
 					return listingProperty;
 
-				}, allListings, listing); // end evaluate
+				}, allListingUrls, listing); // end evaluate
 
 				listingObject[listing] = {};
 				listingObject[listing] = cleanListing(listingInfo);

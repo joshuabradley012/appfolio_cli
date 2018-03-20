@@ -41,7 +41,7 @@ Open a command line and navigate to the search tool in order to run commands:
 
     node search.js [search] [subdomain1, ...]
     
-**\[search]** is the string you want to check listings for, it should be wrapped in apostrophes:
+**\[search]** is the string you want to check listings for, it should be wrapped in quotes:
 
     node search.js 'apartment' [subdomain1, ...]
     node search.js 'cats allowed' [subdomain1, ...]
