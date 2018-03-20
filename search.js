@@ -19,7 +19,7 @@ let subDomains = new Object();
 let listingUrls = new Object();
 let allListings = new Object();
 
-searchSubDomains();
+getListings();
 
 
 /**
@@ -27,10 +27,9 @@ searchSubDomains();
 *
 * @global args
 * @global subDomains
-* @global listingUrls
 * @global allListings
 */
-async function searchSubDomains() {
+async function getListings() {
 
   for (let i = 3; i <= (args.length - 1); i++) {
     const subDomain = args[i];
@@ -38,7 +37,7 @@ async function searchSubDomains() {
     subDomains[key] = subDomain;
   }
 
-  listingUrls = await getListings();
+  listingUrls = await searchSubDomains();
   console.log('Seaching... "' + search + '"');
   
   await searchListings();
@@ -67,7 +66,7 @@ async function searchSubDomains() {
 *
 * @global subDomains
 */
-async function getListings(){
+async function searchSubdomains(){
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -114,8 +113,7 @@ async function getListings(){
 
 
 /**
-* Search each listing for the keyphrase, if there is a match, 
-* extract key data
+* Search each listing for the keyphrase, if there is a match, extract key data
 *
 * @global search
 * @global listungUrls
