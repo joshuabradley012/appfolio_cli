@@ -12,7 +12,7 @@ Download the ZIP file and open it on your desktop or install GitHub and clone th
 
 ### Node
 
-Node is required [install node](https://nodejs.org/):
+Node is required, [install node](https://nodejs.org/):
 
     curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
     sudo apt-get install -y nodejs
