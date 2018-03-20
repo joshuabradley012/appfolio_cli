@@ -15,7 +15,7 @@ const fs = require('fs');
 
 const args = process.argv;
 const search = args[2];
-let subDomains = new Object();
+let subdomains = new Object();
 let listingUrls = new Object();
 let allListings = new Object();
 
@@ -26,21 +26,21 @@ getListings();
 * Collect data from listings and output to .csv
 *
 * @global args
-* @global subDomains
+* @global subdomains
 * @global allListings
 */
 async function getListings() {
 
   for (let i = 3; i <= (args.length - 1); i++) {
-    const subDomain = args[i];
-    const key = 'subDomain' + (i - 3);
-    subDomains[key] = subDomain;
+    const subdomain = args[i];
+    const key = 'subdomain' + (i - 3);
+    subdomains[key] = subdomain;
   }
 
-  listingUrls = await searchSubDomains();
-  console.log('Seaching... "' + search + '"');
+  listingUrls = await scrapeSubdomains();
+  console.log('Seaching for "' + search + '"');
   
-  allListings = await searchListings();
+  await searchListings();
 
   const fields = ['URL', 'Address', 'Rent', 'Size', 'Contact'];
   const json2csvParser = new Json2csvParser({ fields });
@@ -52,7 +52,7 @@ async function getListings() {
 
     fs.writeFile('./' + filename, csv, function(e) {
       if (e) return console.log(e);
-      console.log('Search complete: ' + filename + 'downloaded.');
+      console.log('Search complete: ' + filename + ' downloaded.');
     });
 
   } else {
@@ -64,9 +64,9 @@ async function getListings() {
 /**
 * Search through each subdomain
 *
-* @global subDomains
+* @global subdomains
 */
-async function searchSubdomains(){
+async function scrapeSubdomains(){
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -74,15 +74,15 @@ async function searchSubdomains(){
 
   try {
 
-    const subDomainKeys = Object.keys(subDomains);
+    const subdomainKeys = Object.keys(subdomains);
     let listings = new Object();
 
-    for (const subDomain of subDomainKeys) {
+    for (const subdomain of subdomainKeys) {
 
-      const listingPage = 'https://' + subDomains[subDomain] + '.appfolio.com/listings/';
+      const listingPage = 'https://' + subdomains[subdomain] + '.appfolio.com/listings/';
       await page.goto(listingPage);
 
-      listings[subDomains[subDomain]] = await page.evaluate((subDomains, subDomain) => {
+      listings[subdomains[subdomain]] = await page.evaluate((subdomains, subdomain) => {
 
         const html = document.all[0].outerHTML;
         const urls = html.match(/<a.*?>.*?View Details.*?<\/a>/gi);
@@ -92,13 +92,13 @@ async function searchSubdomains(){
           for (let i = 0; i < urls.length; i++) {
             const key = 'listing'  + i;
             let url = urls[i].match(/href="(.*?)"/i)[1];
-            urlObject[key] = 'https://' +  subDomains[subDomain] + '.appfolio.com' + url;
+            urlObject[key] = 'https://' +  subdomains[subdomain] + '.appfolio.com' + url;
           }
         }
 
         return urlObject;
 
-      }, subDomains, subDomain); // end evaluate
+      }, subdomains, subdomain); // end evaluate
 
     } // end for
 
@@ -169,7 +169,7 @@ async function searchListings() {
         listingObject[listing] = {};
         listingObject[listing] = cleanListing(listingInfo);
 
-        return listingObject;
+        allListings = listingObject;
 
       } // end if
 
