@@ -27,7 +27,7 @@ Install the dependencies:
     cd ~/Applications/appfolio_search
     npm install
 
-When complete, the tool should be ready to use. Note that the `node_modules` folder should not be removed.
+**Note:** the `node_modules` folder should not be removed.
 
 ## Usage
 
