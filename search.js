@@ -118,7 +118,6 @@ async function searchSubdomains(){
 * @global search
 * @global listungUrls
 * @global allListings
-* @param allListingUrls
 */
 async function searchListings() {
 
