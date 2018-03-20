@@ -240,7 +240,7 @@ function objToArray(obj) {
 
 
 /**
-* Pass listing information through regex filters
+* Remove HTML whitespave and unnecessary phrases
 *
 * @param listing
 */
