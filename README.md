@@ -17,7 +17,7 @@ Node is required, [install node](https://nodejs.org/):
     curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
     sudo apt-get install -y nodejs
 
-Ensure it is installed with these commands:
+Ensure node is installed by checking the version:
 
     node -v
     npm -v
