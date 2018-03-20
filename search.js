@@ -223,7 +223,7 @@ function flattenObject(obj) {
 
 
 /**
-* Convert a single dimensional object into an array
+* Convert a single dimensional object into an array of objects
 *
 * @param obj
 */
