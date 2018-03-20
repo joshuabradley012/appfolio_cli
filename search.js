@@ -19,7 +19,7 @@ let subDomains = new Object();
 let listingUrls = new Object();
 let allListings = new Object();
 
-searchSubDomains(subDomains);
+searchSubDomains();
 
 
 /**
