@@ -16,7 +16,3 @@ app.post('/search.js', function (req, res) {
 	var result = shell_exec('node search.js "rent" solarentals');
 	console.log(result);
 });
-
-app.listen(3000, function () {
-	console.log('Example app listening on port 3000:')
-});
