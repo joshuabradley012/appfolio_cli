@@ -2,7 +2,6 @@
   "name": "appfolio_search",
   "version": "1.0.0",
   "description": "## Installation",
-  "main": "search.js",
   "scripts": {
     "start": "node server.js"
   },
@@ -25,6 +24,7 @@
   "devDependencies": {},
   "keywords": [],
   "engines": {
-    "node": "9.6.1"
+    "node": "9.6.1",
+    "npm": "5.7.1"
   }
 }
