@@ -65,7 +65,7 @@ async function getListings() {
 async function scrapeSubdomains(){
 
 /**
-* Search through each subdomain
+* Scrape each subdomain for listing urls
 *
 * @global subdomains
 */
