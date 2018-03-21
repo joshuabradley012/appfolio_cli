@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const request = require('request');
 const shell_exec = require('shell_exec').shell_exec;
 const app = express();
+var port = process.env.PORT || 8080;
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,3 +17,10 @@ app.post('/search.js', function (req, res) {
 	var result = shell_exec('node search.js "rent" solarentals');
 	console.log(result);
 });
+
+
+app.listen(port, function() {
+	console.log('Our app is running on http://localhost:' + port);
+});
+
+≈
