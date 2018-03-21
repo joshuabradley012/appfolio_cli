@@ -51,7 +51,7 @@ async function getListings() {
     const csv = json2csvParser.parse(objToArray(allListings));
     const filename = 'listings_' + Date.now() + '.csv';
 
-    fs.writeFile('./' + filename, csv, function(e) {
+    fs.writeFile('./public/' + filename, csv, function(e) {
       if (e) return console.log(e);
       console.log('Search complete: ' + filename + ' downloaded.');
     });
