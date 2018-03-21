@@ -49,7 +49,7 @@ async function getListings() {
   if (objToArray(allListings).length) {
 
     const csv = json2csvParser.parse(objToArray(allListings));
-    const filename = 'listings.csv';
+    const filename = 'listings_' + Date.now() + '.csv';
 
     fs.writeFile('./' + filename, csv, function(e) {
       if (e) return console.log(e);
@@ -70,7 +70,7 @@ async function scrapeSubdomains(){
 * @global subdomains
 */
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
   const page = await browser.newPage();
   console.log('Gathering listings...');
 
@@ -123,7 +123,7 @@ async function searchListings() {
 * @global listingUrls
 */
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
   const page = await browser.newPage();
 
   try {
