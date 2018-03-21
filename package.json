@@ -4,8 +4,7 @@
   "description": "## Installation",
   "main": "search.js",
   "scripts": {
-    "start": "node server.js",
-    "search": "node search.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -22,9 +21,6 @@
     "puppeteer": "^1.2.0",
     "request": "^2.81.0",
     "shell_exec": "^1.0.3"
-  },
-  "bugs": {
-    "url": "https://github.com/joshuabradley012/appfolio_search/issues"
   },
   "devDependencies": {},
   "keywords": [],
