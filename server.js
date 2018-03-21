@@ -13,12 +13,6 @@ app.get('/', function (req, res) {
 	res.render('index');
 });
 
-app.post('/search.js', function (req, res) {
-	var result = shell_exec('node search.js "rent" solarentals');
-	console.log(result);
-});
-
-
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
 });
