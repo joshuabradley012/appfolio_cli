@@ -16,10 +16,11 @@
   "homepage": "https://github.com/joshuabradley012/appfolio_search.git#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
     "express": "^4.15.3",
-    "request": "^2.81.0",
-    "shell_exec": "^1.0.3",
-    "puppeteer": "^1.2.0",
     "json2csv": "^4.0.2",
+    "puppeteer": "^1.2.0",
+    "request": "^2.81.0",
+    "shell_exec": "^1.0.3"
   }
 }

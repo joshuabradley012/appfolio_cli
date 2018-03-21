@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
-const shell = require('shelljs');
+const shell_exec = require('shell_exec').shell_exec;
 const app = express();
 
 app.use(express.static('public'));
@@ -12,8 +12,9 @@ app.get('/', function (req, res) {
 	res.render('index');
 });
 
-app.post('search.js', function (req, res) {
-	shell.exec('./search.js');
+app.post('/search.js', function (req, res) {
+	var result = shell_exec('node search.js "rent" solarentals');
+	console.log(result);
 });
 
 app.listen(3000, function () {
