@@ -1,13 +1,13 @@
-/***********************************************************
-* Project: AppFolio Listing Search Tool
-* File: search.js
-* Date: 03.19.2018
-* Author: Josh Bradley
+/**
+* AppFolio Listing Search Tool
+* ./appfolio_search/search.js
+* 03.19.2018
+* Josh Bradley
 * 
 * @requires puppeteer
 * @requires json2csv
-* @requires js
-************************************************************/
+* @requires fs
+*/
 
 const puppeteer = require('puppeteer');
 const Json2csvParser = require('json2csv').Parser;
@@ -22,6 +22,8 @@ let allListings = new Object();
 getListings();
 
 
+async function getListings() {
+
 /**
 * Collect data from listings and output to .csv
 *
@@ -29,7 +31,6 @@ getListings();
 * @global subdomains
 * @global allListings
 */
-async function getListings() {
 
   for (let i = 3; i <= (args.length - 1); i++) {
     const subdomain = args[i];
@@ -61,12 +62,13 @@ async function getListings() {
 }
 
 
+async function scrapeSubdomains(){
+
 /**
 * Search through each subdomain
 *
 * @global subdomains
 */
-async function scrapeSubdomains(){
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -112,13 +114,14 @@ async function scrapeSubdomains(){
 }
 
 
+async function searchListings() {
+
 /**
 * Search each listing for the keyphrase, if there is a match, extract key data
 *
 * @global search
 * @global listingUrls
 */
-async function searchListings() {
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -184,12 +187,14 @@ async function searchListings() {
   }
 }
 
+
+function flattenObject(obj) {
+
 /**
 * Convert nested object into single dimensional key value pairs
 *
 * @param obj
 */
-function flattenObject(obj) {
 
   var toReturn = {};
 
@@ -216,12 +221,13 @@ function flattenObject(obj) {
 };
 
 
+function objToArray(obj) {
+
 /**
 * Convert a single dimensional object into an array of objects
 *
 * @param obj
 */
-function objToArray(obj) {
 
   var objArr = [];
   const keys = Object.keys(obj);
@@ -235,12 +241,13 @@ function objToArray(obj) {
 }
 
 
+function cleanListing(listing) {
+
 /**
 * Remove HTML whitespace and unnecessary phrases
 *
 * @param listing
 */
-function cleanListing(listing) {
 
   const listingKeys = Object.keys(listing);
 

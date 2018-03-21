@@ -1,0 +1,25 @@
+{
+  "name": "appfolio_search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "search.js",
+  "scripts": {
+    "start": "node server.js",
+    "search": "node search.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshuabradley012/appfolio_search.git"
+  },
+  "author": "josh bradley",
+  "license": "ISC",
+  "homepage": "https://github.com/joshuabradley012/appfolio_search.git#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "request": "^2.81.0",
+    "shell_exec": "^1.0.3",
+    "puppeteer": "^1.2.0",
+    "json2csv": "^4.0.2",
+  }
+}
