@@ -117,7 +117,7 @@ async function scrapeSubdomains(){
 async function searchListings() {
 
 /**
-* Search each listing for the keyphrase, if there is a match, extract key data
+* Search each listing url for the keyphrase, if there is a match, extract key data
 *
 * @global search
 * @global listingUrls
