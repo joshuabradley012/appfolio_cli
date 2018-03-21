@@ -2,21 +2,22 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const shell_exec = require('shell_exec').shell_exec;
-const app = express();
+const server = express();
 var port = process.env.PORT || 8080;
 
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs')
+server.use(express.static('public'));
+server.use(bodyParser.urlencoded({ extended: true }));
+server.set('view engine', 'ejs')
 
-app.get('/', function (req, res) {
+server.get('/', function (req, res) {
 	res.render('index');
 });
 
-app.post('/search.js', function (req, res) {
+server.post('/search.js', function (req, res) {
 	var result = shell_exec('node search.js "rent" solarentals');
 });
 
-app.listen(port, function() {
+server.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
 });
+server.timeout = 360000;
