@@ -49,7 +49,7 @@ async function getListings() {
   if (objToArray(allListings).length) {
 
     const csv = json2csvParser.parse(objToArray(allListings));
-    const filename = 'listings_' + Date.now() + '.csv';
+    const filename = 'listings.csv';
 
     fs.writeFile('./' + filename, csv, function(e) {
       if (e) return console.log(e);
