@@ -9,6 +9,8 @@
 * @requires fs
 */
 
+module.exports = getListings;
+
 const puppeteer = require('puppeteer');
 const Json2csvParser = require('json2csv').Parser;
 const fs = require('fs');
@@ -19,11 +21,6 @@ let subdomains = new Object();
 let listingUrls = new Object();
 let allListings = new Object();
 
-getListings();
-
-
-async function getListings() {
-
 /**
 * Collect data from listings and output to .csv
 *
@@ -31,6 +28,8 @@ async function getListings() {
 * @global subdomains
 * @global allListings
 */
+
+async function getListings() {
 
   for (let i = 3; i <= (args.length - 1); i++) {
     const subdomain = args[i];
@@ -45,11 +44,12 @@ async function getListings() {
 
   const fields = ['URL', 'Address', 'Rent', 'Size', 'Contact'];
   const json2csvParser = new Json2csvParser({ fields });
+  const listingArray = objToArray(allListings);
 
-  if (objToArray(allListings).length) {
+  if (listingArray.length) {
 
-    const csv = json2csvParser.parse(objToArray(allListings));
-    const filename = 'listings_' + Date.now() + '.csv';
+    const csv = json2csvParser.parse(listingArray);
+    const filename = 'listings_' + Date.now().toUTCString + '.csv';
 
     fs.writeFile('./public/' + filename, csv, function(e) {
       if (e) return console.log(e);
@@ -62,13 +62,13 @@ async function getListings() {
 }
 
 
-async function scrapeSubdomains(){
-
 /**
 * Scrape each subdomain for listing urls
 *
 * @global subdomains
 */
+
+async function scrapeSubdomains(){
 
   const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
   const page = await browser.newPage();
@@ -114,14 +114,14 @@ async function scrapeSubdomains(){
 }
 
 
-async function searchListings() {
-
 /**
 * Search each listing url for the keyphrase, if there is a match, extract key data
 *
 * @global search
 * @global listingUrls
 */
+
+async function searchListings() {
 
   const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
   const page = await browser.newPage();
@@ -188,13 +188,13 @@ async function searchListings() {
 }
 
 
-function flattenObject(obj) {
-
 /**
 * Convert nested object into single dimensional key value pairs
 *
 * @param obj
 */
+
+function flattenObject(obj) {
 
   var toReturn = {};
 
@@ -221,13 +221,13 @@ function flattenObject(obj) {
 };
 
 
-function objToArray(obj) {
-
 /**
 * Convert a single dimensional object into an array of objects
 *
 * @param obj
 */
+
+function objToArray(obj) {
 
   var objArr = [];
   const keys = Object.keys(obj);
@@ -241,13 +241,13 @@ function objToArray(obj) {
 }
 
 
-function cleanListing(listing) {
-
 /**
 * Remove HTML whitespace and unnecessary phrases
 *
 * @param listing
 */
+
+function cleanListing(listing) {
 
   const listingKeys = Object.keys(listing);
 
