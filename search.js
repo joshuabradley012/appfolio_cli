@@ -9,17 +9,18 @@
 * @requires fs
 */
 
-module.exports = getListings;
-
 const puppeteer = require('puppeteer');
 const Json2csvParser = require('json2csv').Parser;
 const fs = require('fs');
 
 const args = process.argv;
 const search = args[2];
+
 let subdomains = new Object();
 let listingUrls = new Object();
 let allListings = new Object();
+
+getListings();
 
 /**
 * Collect data from listings and output to .csv
@@ -49,9 +50,9 @@ async function getListings() {
   if (listingArray.length) {
 
     const csv = json2csvParser.parse(listingArray);
-    const filename = 'listings_' + Date.now().toUTCString + '.csv';
+    const filename = 'listings_' + Date.now() + '.csv';
 
-    fs.writeFile('./public/' + filename, csv, function(e) {
+    fs.writeFile('./' + filename, csv, function(e) {
       if (e) return console.log(e);
       console.log('Search complete: ' + filename + ' downloaded.');
     });
@@ -68,7 +69,7 @@ async function getListings() {
 * @global subdomains
 */
 
-async function scrapeSubdomains(){
+async function scrapeSubdomains() {
 
   const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
   const page = await browser.newPage();
